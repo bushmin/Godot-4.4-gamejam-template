@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cs5bs4pra8r1u"]
+
+[ext_resource type="PackedScene" uid="uid://bu3p0gem72gkj" path="res://Scenes/GameField/GameField.tscn" id="1_pemxr"]
+[ext_resource type="PackedScene" uid="uid://mfaag4dkpa2x" path="res://Scenes/UI/UI.tscn" id="2_b60ro"]
+[ext_resource type="PackedScene" uid="uid://bhdqb350icnjw" path="res://Scenes/PauseMenu/PauseMenu.tscn" id="5_fwyhx"]
+[ext_resource type="Script" uid="uid://l6nqv0wdsrj0" path="res://Scenes/GameField/camera_2d.gd" id="5_lqj6m"]
+
+[node name="MainGame" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+script = ExtResource("5_lqj6m")
+NOISE_SHAKE_SPEED = 1000.0
+NOISE_SHAKE_STRENGTH = 16.0
+SHAKE_DECAY_RATE = 0.5
+
+[node name="GameField" parent="." instance=ExtResource("1_pemxr")]
+scale = Vector2(0.5, 0.5)
+
+[node name="UI" parent="." instance=ExtResource("2_b60ro")]
+layout_mode = 1
+
+[node name="PauseMenu" parent="." instance=ExtResource("5_fwyhx")]
+visible = false
+layout_mode = 1

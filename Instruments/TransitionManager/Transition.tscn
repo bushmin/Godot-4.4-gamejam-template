@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=3 uid="uid://cvuxqvy3ctanw"]
+
+[ext_resource type="Script" uid="uid://u4v581k8s5oh" path="res://Instruments/TransitionManager/Transition.gd" id="1"]
+
+[sub_resource type="Animation" id="1"]
+resource_name = "DISSOLVE"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dissolve:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="3"]
+resource_name = "NEW_LEVEL"
+
+[sub_resource type="Animation" id="2"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dissolve:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o8r4q"]
+_data = {
+&"DISSOLVE": SubResource("1"),
+&"NEW_LEVEL": SubResource("3"),
+&"RESET": SubResource("2")
+}
+
+[node name="SceneTransition" type="CanvasLayer"]
+layer = 99
+script = ExtResource("1")
+
+[node name="Dissolve" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.0470588, 0.0470588, 0.0470588, 1)
+
+[node name="Loading" type="Label" parent="Dissolve"]
+modulate = Color(1, 1, 1, 0.670588)
+layout_mode = 0
+offset_left = 1824.0
+offset_top = 1039.0
+offset_right = 1899.0
+offset_bottom = 1062.0
+text = "Loading..."
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_o8r4q")
+}

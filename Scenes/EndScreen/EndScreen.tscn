@@ -1,0 +1,91 @@
+[gd_scene load_steps=6 format=3 uid="uid://bhwh7ed22fipf"]
+
+[ext_resource type="Script" uid="uid://boni7wka3t5je" path="res://Scenes/EndScreen/end_screen.gd" id="1_suj08"]
+[ext_resource type="Theme" uid="uid://dhvsei0a7jp3j" path="res://GlobalTheme.tres" id="2_3uwcp"]
+[ext_resource type="Texture2D" uid="uid://dvulh2d7yaxif" path="res://images/interface/endpage.png" id="3_l37y3"]
+[ext_resource type="Texture2D" uid="uid://4a4lqxwiil0l" path="res://images/interface/endpage button.png" id="4_2davd"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_shcr3"]
+texture = ExtResource("4_2davd")
+
+[node name="EndScreen" type="Control" groups=["END"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_3uwcp")
+script = ExtResource("1_suj08")
+
+[node name="BG" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_l37y3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Credits" type="Label" parent="."]
+layout_mode = 0
+offset_left = 690.0
+offset_top = 43.0
+offset_right = 1240.0
+offset_bottom = 104.0
+theme = ExtResource("2_3uwcp")
+theme_override_font_sizes/font_size = 32
+text = "(Your ending screne goes here)"
+horizontal_alignment = 1
+
+[node name="MainText" type="Label" parent="."]
+layout_mode = 0
+offset_left = 466.0
+offset_top = 147.0
+offset_right = 1475.0
+offset_bottom = 384.0
+theme = ExtResource("2_3uwcp")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 64
+text = "Thanks for checking out this Godot 4.4 \"skeleton\" for small games and gamejams!"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ExtraText" type="Label" parent="."]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 491.0
+offset_right = 1835.0
+offset_bottom = 610.0
+theme = ExtResource("2_3uwcp")
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 48
+text = "If you have any questions or suggestions,
+feel free to reach out via any socials found on our website:"
+horizontal_alignment = 1
+
+[node name="LinkButton" type="LinkButton" parent="."]
+layout_mode = 0
+offset_left = 805.0
+offset_top = 671.0
+offset_right = 1103.0
+offset_bottom = 713.0
+theme_override_constants/underline_spacing = 10
+text = "nozomugames.com"
+uri = "https://nozomugames.com"
+
+[node name="RestartButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 726.0
+offset_top = 920.0
+offset_right = 1172.0
+offset_bottom = 1016.0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxTexture_shcr3")
+text = "To the title"
+
+[connection signal="pressed" from="RestartButton" to="." method="_on_restart_button_pressed"]

@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://bu3p0gem72gkj"]
+
+[ext_resource type="Script" uid="uid://brt0swa1ff7u8" path="res://Scenes/GameField/game_field.gd" id="1_3gtc0"]
+[ext_resource type="Texture2D" uid="uid://bgcbey2w3qarf" path="res://images/interface/controls bigger.png" id="2_8mfdk"]
+[ext_resource type="PackedScene" uid="uid://rubpe83jcihs" path="res://Objects/Character/Character.tscn" id="2_l1733"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8mfdk"]
+size = Vector2(125, 2281)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_35sir"]
+size = Vector2(4104.25, 114.75)
+
+[node name="GameField" type="Node2D" groups=["GAME_FIELD"]]
+script = ExtResource("1_3gtc0")
+
+[node name="BG" type="ColorRect" parent="."]
+z_index = -10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 3840.0
+offset_bottom = 2160.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.788235, 0.505882, 0.294118, 1)
+
+[node name="Controls" type="TextureRect" parent="BG"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 1828.0
+offset_right = 608.0
+offset_bottom = 2106.0
+texture = ExtResource("2_8mfdk")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Character" parent="." instance=ExtResource("2_l1733")]
+position = Vector2(761, 865)
+
+[node name="Boundaries" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2(-72.5, 1066.5)
+shape = SubResource("RectangleShape2D_8mfdk")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2(3914, 1090)
+shape = SubResource("RectangleShape2D_8mfdk")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2(1903.88, -67.625)
+shape = SubResource("RectangleShape2D_35sir")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2(1954, 2230)
+shape = SubResource("RectangleShape2D_35sir")

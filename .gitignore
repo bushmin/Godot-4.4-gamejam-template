@@ -1,0 +1,6 @@
+.vscode/
+export/
+
+# Godot 4+ specific ignores
+.godot/
+/android/

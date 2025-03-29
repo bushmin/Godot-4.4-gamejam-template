@@ -1,0 +1,240 @@
+[gd_scene load_steps=15 format=3 uid="uid://bhdqb350icnjw"]
+
+[ext_resource type="Theme" uid="uid://dhvsei0a7jp3j" path="res://GlobalTheme.tres" id="1_21hhr"]
+[ext_resource type="Script" uid="uid://3nlu8vj8im1i" path="res://Scenes/PauseMenu/pause_menu.gd" id="2_hi1ku"]
+[ext_resource type="Texture2D" uid="uid://vvhcuvpe7gwe" path="res://images/interface/postcard.png" id="3_6kduu"]
+[ext_resource type="PackedScene" uid="uid://clyrpedect8tq" path="res://Objects/VolumeSlider/VolumeSlider.tscn" id="4_456hk"]
+[ext_resource type="Texture2D" uid="uid://bj17qf5mwkp81" path="res://images/interface/button main menu - pressed.png" id="5_a67lc"]
+[ext_resource type="Texture2D" uid="uid://bmb6smidodtio" path="res://images/interface/button main menu.png" id="6_82e3t"]
+
+[sub_resource type="Animation" id="Animation_rhvpn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CardControl:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CardControl:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Shadow:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_24hy8"]
+resource_name = "slide_out"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CardControl:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -1080)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("CardControl:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Shadow:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pa7jw"]
+_data = {
+&"RESET": SubResource("Animation_rhvpn"),
+&"slide_out": SubResource("Animation_24hy8")
+}
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ndkln"]
+texture = ExtResource("5_a67lc")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_go1xn"]
+texture = ExtResource("5_a67lc")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_og4nk"]
+texture = ExtResource("5_a67lc")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vsq5i"]
+texture = ExtResource("5_a67lc")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_88uen"]
+texture = ExtResource("6_82e3t")
+
+[node name="PauseMenu" type="Control" groups=["PAUSE_MENU"]]
+process_mode = 3
+z_index = 10
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_21hhr")
+script = ExtResource("2_hi1ku")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_pa7jw")
+}
+
+[node name="Shadow" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.807843)
+
+[node name="CardControl" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Card" type="TextureRect" parent="CardControl"]
+layout_mode = 0
+offset_left = 131.0
+offset_top = 109.0
+offset_right = 1780.0
+offset_bottom = 973.0
+mouse_filter = 2
+texture = ExtResource("3_6kduu")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BottomText" type="Label" parent="CardControl/Card"]
+layout_mode = 0
+offset_left = 322.0
+offset_top = 62.0
+offset_right = 1334.0
+offset_bottom = 185.0
+theme = ExtResource("1_21hhr")
+theme_override_font_sizes/font_size = 64
+text = "Game paused"
+horizontal_alignment = 1
+
+[node name="ControlsText" type="Label" parent="CardControl/Card"]
+layout_mode = 0
+offset_left = 515.0
+offset_top = 276.0
+offset_right = 1126.0
+offset_bottom = 357.0
+theme = ExtResource("1_21hhr")
+text = "Controls: Arrows + Space or WASD + E"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CardControl/Card"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -130.0
+offset_top = 5.99997
+offset_right = 86.0
+offset_bottom = 168.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.2, 1.2)
+theme_override_constants/separation = 40
+
+[node name="Music" type="Label" parent="CardControl/Card/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_21hhr")
+text = "music volume"
+horizontal_alignment = 1
+
+[node name="SliderMusic" parent="CardControl/Card/VBoxContainer/Music" instance=ExtResource("4_456hk")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 41.6666
+offset_bottom = 57.6666
+
+[node name="SFX" type="Label" parent="CardControl/Card/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_21hhr")
+text = "sfx volume"
+horizontal_alignment = 1
+
+[node name="SliderSFX" parent="CardControl/Card/VBoxContainer/SFX" instance=ExtResource("4_456hk")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 39.9999
+offset_bottom = 55.9999
+type = 1
+
+[node name="HSeparator" type="HSeparator" parent="CardControl/Card/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="ResumeButton" type="Button" parent="CardControl/Card"]
+layout_mode = 0
+offset_left = 639.0
+offset_top = 691.0
+offset_right = 1005.0
+offset_bottom = 787.0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 48
+theme_override_styles/focus = SubResource("StyleBoxTexture_ndkln")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_go1xn")
+theme_override_styles/hover = SubResource("StyleBoxTexture_og4nk")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_vsq5i")
+theme_override_styles/normal = SubResource("StyleBoxTexture_88uen")
+text = "Resume"
+
+[connection signal="pressed" from="CardControl/Card/ResumeButton" to="." method="_on_button_pressed"]

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://p1o5ib1m0r6i"]
+
+[ext_resource type="Shader" uid="uid://c83hn5mk7l2r8" path="res://shaders/ColorShader.gdshader" id="1_h6m1c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_loxfl"]
+shader = ExtResource("1_h6m1c")
+shader_parameter/colorArray = PackedColorArray(0.953771, 0.953771, 0.953771, 1, 0.858824, 0.756863, 0.686275, 1, 0.654902, 0.654902, 0.619608, 1, 0.878431, 0.72549, 0.290196, 1, 0.698039, 0.686275, 0.360784, 1, 0.607843, 0.411765, 0.439216, 1, 0.866667, 0.662745, 0.388235, 1, 0.788235, 0.505882, 0.294118, 1, 0.811765, 0.415686, 0.309804, 1, 0.145098, 0.152941, 0.164706, 1)
+
+[node name="ColorShader" type="ColorRect"]
+material = SubResource("ShaderMaterial_loxfl")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0, 0, 0, 0)

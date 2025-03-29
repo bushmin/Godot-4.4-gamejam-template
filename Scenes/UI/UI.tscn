@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://mfaag4dkpa2x"]
+
+[ext_resource type="Theme" uid="uid://dhvsei0a7jp3j" path="res://GlobalTheme.tres" id="1_mbh6k"]
+[ext_resource type="Script" uid="uid://ba25iuj4n0qke" path="res://Scenes/UI/ui.gd" id="2_b0ijr"]
+[ext_resource type="Texture2D" uid="uid://ck2cp0d7bxquw" path="res://images/interface/pause.png" id="3_akgwn"]
+
+[node name="UI" type="Control" groups=["UI"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_mbh6k")
+script = ExtResource("2_b0ijr")
+
+[node name="PauseButton" type="TextureButton" parent="."]
+process_mode = 3
+z_index = 5
+offset_right = 104.0
+offset_bottom = 112.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("3_akgwn")
+stretch_mode = 3
+
+[node name="WinButton" type="Button" parent="."]
+offset_left = 1631.0
+offset_top = 26.0
+offset_right = 1997.0
+offset_bottom = 122.0
+scale = Vector2(0.7, 0.7)
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 48
+shortcut_in_tooltip = false
+text = "Click to win"
+
+[connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="WinButton" to="." method="_on_win_button_pressed"]

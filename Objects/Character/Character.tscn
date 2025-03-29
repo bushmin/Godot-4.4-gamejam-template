@@ -1,0 +1,117 @@
+[gd_scene load_steps=17 format=3 uid="uid://rubpe83jcihs"]
+
+[ext_resource type="Script" uid="uid://ccw5xj3khfeb4" path="res://Objects/Character/character.gd" id="1_3btn0"]
+[ext_resource type="Texture2D" uid="uid://w48uhxhdhlh8" path="res://images/fox/fox_bark1.png" id="1_x11lv"]
+[ext_resource type="Texture2D" uid="uid://b1tyhwpwxfr5t" path="res://images/fox/fox_bark2.png" id="2_4o0tl"]
+[ext_resource type="Script" uid="uid://l8x1lyakjk8h" path="res://Objects/Character/bark_behaviour.gd" id="2_8dr1w"]
+[ext_resource type="Texture2D" uid="uid://v3xe551gvc8p" path="res://images/fox/fox1.png" id="3_lxxq2"]
+[ext_resource type="Script" uid="uid://cpdsvxpnjqrbf" path="res://Objects/Character/movement_behaviour.gd" id="3_parke"]
+[ext_resource type="Texture2D" uid="uid://8wiqcm4iaapn" path="res://images/fox/fox2.png" id="4_fajqi"]
+[ext_resource type="Script" uid="uid://cs5wcgagx3fup" path="res://Objects/Character/animation_behaviour.gd" id="4_owoj8"]
+[ext_resource type="Texture2D" uid="uid://d1l4fabqcuwh7" path="res://images/fox/fox sit.png" id="9_3b0tj"]
+[ext_resource type="AudioStream" uid="uid://ph813d63f86c" path="res://sfx/fox_bark.mp3" id="9_alk0q"]
+[ext_resource type="AudioStream" uid="uid://b7cfswfxnhfun" path="res://sfx/footstep_grass_000.ogg" id="10_alk0q"]
+[ext_resource type="AudioStream" uid="uid://cht4kgoy5465y" path="res://sfx/footstep_grass_001.ogg" id="11_3b0tj"]
+[ext_resource type="AudioStream" uid="uid://c3c7cjm2af30g" path="res://sfx/footstep_grass_002.ogg" id="12_7nuro"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_twgt0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_x11lv")
+}],
+"loop": true,
+"name": &"bark_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_x11lv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_4o0tl")
+}],
+"loop": true,
+"name": &"bark_run",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_lxxq2")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_lxxq2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_fajqi")
+}],
+"loop": true,
+"name": &"run",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_3b0tj")
+}],
+"loop": true,
+"name": &"sit",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x11lv"]
+size = Vector2(132, 69)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_sav76"]
+streams_count = 3
+stream_0/stream = ExtResource("10_alk0q")
+stream_1/stream = ExtResource("11_3b0tj")
+stream_2/stream = ExtResource("12_7nuro")
+
+[node name="Character" type="CharacterBody2D" groups=["MAIN_CHARACTER"]]
+script = ExtResource("1_3btn0")
+
+[node name="MovementBehaviour" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_parke")
+
+[node name="BarkBehaviour" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_8dr1w")
+
+[node name="AnimationBehaviour" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_owoj8")
+
+[node name="CharacterSprite" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_twgt0")
+animation = &"sit"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-1, 4.5)
+shape = SubResource("RectangleShape2D_x11lv")
+
+[node name="BarkSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("9_alk0q")
+volume_db = -10.0
+bus = &"SFX"
+
+[node name="StepsSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_sav76")
+volume_db = -4.0
+bus = &"SFX"
+
+[node name="BarkTimeout" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.2
+one_shot = true
+
+[connection signal="timeout" from="BarkTimeout" to="AnimationBehaviour" method="_on_bark_timeout"]

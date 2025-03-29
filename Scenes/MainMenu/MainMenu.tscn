@@ -1,0 +1,193 @@
+[gd_scene load_steps=10 format=3 uid="uid://dg0io0m1wcmd7"]
+
+[ext_resource type="Theme" uid="uid://dhvsei0a7jp3j" path="res://GlobalTheme.tres" id="1_enjhb"]
+[ext_resource type="Script" uid="uid://lh6xedgmm6cc" path="res://Scenes/MainMenu/main_menu.gd" id="2_wgsk1"]
+[ext_resource type="Texture2D" uid="uid://vvhcuvpe7gwe" path="res://images/interface/postcard.png" id="3_17k7v"]
+[ext_resource type="FontFile" uid="uid://d05yajp3iubii" path="res://fonts/SpaceGrotesk-Bold.ttf" id="4_kpx3y"]
+
+[sub_resource type="Animation" id="Animation_rhvpn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CardControl:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CardControl:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Shadow:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_24hy8"]
+resource_name = "start"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CardControl:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -1080)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("CardControl:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Shadow:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pa7jw"]
+_data = {
+&"RESET": SubResource("Animation_rhvpn"),
+&"start": SubResource("Animation_24hy8")
+}
+
+[sub_resource type="InputEventAction" id="InputEventAction_dwmcf"]
+action = &"ui_accept"
+
+[sub_resource type="Shortcut" id="Shortcut_ui17c"]
+events = [SubResource("InputEventAction_dwmcf")]
+
+[node name="MainMenu" type="Control"]
+process_mode = 3
+z_index = 10
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_enjhb")
+script = ExtResource("2_wgsk1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_pa7jw")
+}
+
+[node name="Shadow" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0, 0, 0, 0.752941)
+
+[node name="CardControl" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Card" type="TextureRect" parent="CardControl"]
+layout_mode = 0
+offset_left = 131.0
+offset_top = 109.0
+offset_right = 1780.0
+offset_bottom = 973.0
+texture = ExtResource("3_17k7v")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="CardControl/Card"]
+modulate = Color(0.217701, 0.217701, 0.217701, 1)
+layout_mode = 0
+offset_left = 181.0
+offset_top = 102.0
+offset_right = 1480.0
+offset_bottom = 337.0
+theme = ExtResource("1_enjhb")
+theme_override_fonts/font = ExtResource("4_kpx3y")
+theme_override_font_sizes/font_size = 80
+text = "Godot 4.4
+gamejam template"
+horizontal_alignment = 1
+
+[node name="ExtraText" type="Label" parent="CardControl/Card"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 345.0
+offset_right = 1648.0
+offset_bottom = 451.0
+theme = ExtResource("1_enjhb")
+theme_override_font_sizes/font_size = 36
+text = "to start your projects just a little faster
++ some extra homebrew utilities"
+horizontal_alignment = 1
+
+[node name="StartButton" type="Button" parent="CardControl/Card"]
+layout_mode = 0
+offset_left = 643.0
+offset_top = 691.0
+offset_right = 1009.0
+offset_bottom = 787.0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 48
+shortcut = SubResource("Shortcut_ui17c")
+shortcut_in_tooltip = false
+text = "Start"
+
+[node name="LinkButton" type="LinkButton" parent="CardControl/Card"]
+offset_left = 641.0
+offset_top = 523.0
+offset_right = 1015.0
+offset_bottom = 565.0
+theme_override_constants/underline_spacing = 10
+text = "made by Nozomu Games"
+uri = "https://nozomugames.com"
+
+[connection signal="pressed" from="CardControl/Card/StartButton" to="." method="_on_start_button_pressed"]
