@@ -132,23 +132,39 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Card" type="TextureRect" parent="CardControl"]
-layout_mode = 0
-offset_left = 131.0
-offset_top = 109.0
-offset_right = 1780.0
-offset_bottom = 973.0
+[node name="CenterContainer" type="CenterContainer" parent="CardControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Card" type="TextureRect" parent="CardControl/CenterContainer"]
+custom_minimum_size = Vector2(1638.5, 861.5)
+layout_mode = 2
 texture = ExtResource("3_17k7v")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Title" type="Label" parent="CardControl/Card"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CardControl"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -357.5
+offset_top = -104.5
+offset_right = 357.5
+offset_bottom = 104.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="CardControl/VBoxContainer"]
 modulate = Color(0.217701, 0.217701, 0.217701, 1)
-layout_mode = 0
-offset_left = 181.0
-offset_top = 102.0
-offset_right = 1480.0
-offset_bottom = 337.0
+layout_mode = 2
 theme = ExtResource("1_enjhb")
 theme_override_fonts/font = ExtResource("4_kpx3y")
 theme_override_font_sizes/font_size = 80
@@ -156,24 +172,40 @@ text = "Godot 4.4
 gamejam template"
 horizontal_alignment = 1
 
-[node name="ExtraText" type="Label" parent="CardControl/Card"]
-layout_mode = 0
-offset_left = 7.0
-offset_top = 345.0
-offset_right = 1648.0
-offset_bottom = 451.0
+[node name="HSeparator" type="HSeparator" parent="CardControl/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_enjhb")
+theme_override_constants/separation = 50
+
+[node name="ExtraText" type="Label" parent="CardControl/VBoxContainer"]
+layout_mode = 2
 theme = ExtResource("1_enjhb")
 theme_override_font_sizes/font_size = 36
 text = "to start your projects just a little faster
 + some extra homebrew utilities"
 horizontal_alignment = 1
 
-[node name="StartButton" type="Button" parent="CardControl/Card"]
-layout_mode = 0
-offset_left = 643.0
-offset_top = 691.0
-offset_right = 1009.0
-offset_bottom = 787.0
+[node name="HSeparator2" type="HSeparator" parent="CardControl/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_enjhb")
+theme_override_constants/separation = 75
+
+[node name="LinkButton" type="LinkButton" parent="CardControl/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/underline_spacing = 10
+text = "made by Nozomu Games"
+uri = "https://nozomugames.com"
+
+[node name="HSeparator3" type="HSeparator" parent="CardControl/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_enjhb")
+theme_override_constants/separation = 100
+
+[node name="StartButton" type="Button" parent="CardControl/VBoxContainer"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_horizontal = 4
 mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 48
@@ -181,13 +213,4 @@ shortcut = SubResource("Shortcut_ui17c")
 shortcut_in_tooltip = false
 text = "Start"
 
-[node name="LinkButton" type="LinkButton" parent="CardControl/Card"]
-offset_left = 641.0
-offset_top = 523.0
-offset_right = 1015.0
-offset_bottom = 565.0
-theme_override_constants/underline_spacing = 10
-text = "made by Nozomu Games"
-uri = "https://nozomugames.com"
-
-[connection signal="pressed" from="CardControl/Card/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CardControl/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
