@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=9 format=3 uid="uid://dhvsei0a7jp3j"]
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://dhvsei0a7jp3j"]
 
 [ext_resource type="FontFile" uid="uid://d05yajp3iubii" path="res://fonts/SpaceGrotesk-Bold.ttf" id="1_pt3t6"]
 [ext_resource type="Texture2D" uid="uid://bj17qf5mwkp81" path="res://images/interface/button main menu - pressed.png" id="2_wwiaa"]
@@ -13,6 +13,9 @@ texture = ExtResource("2_wwiaa")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4onru"]
 texture = ExtResource("3_pt3t6")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wwiaa"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iml2b"]
 bg_color = Color(0.889346, 0.672765, 0.404913, 1)
 
@@ -24,6 +27,7 @@ Button/styles/focus = SubResource("StyleBoxTexture_lshlv")
 Button/styles/hover = SubResource("StyleBoxTexture_lshlv")
 Button/styles/normal = SubResource("StyleBoxTexture_4onru")
 Button/styles/pressed = SubResource("StyleBoxTexture_lshlv")
+HSeparator/styles/separator = SubResource("StyleBoxFlat_wwiaa")
 HSlider/styles/grabber_area = SubResource("StyleBoxFlat_iml2b")
 Label/colors/font_color = Color(0, 0, 0, 1)
 Label/font_sizes/font_size = 32
